@@ -1,0 +1,5 @@
+Criação da API de Create product
+Criação da API de List products
+Criação da API de Get product
+Criação da API de Update product
+Criação da API de Delete product
