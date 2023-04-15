@@ -3,3 +3,16 @@ Criação da API de List products
 Criação da API de Get product
 Criação da API de Update product
 Criação da API de Delete product
+
+----
+LINKS ÚTEIS
+
+https://www.freecodecamp.org/portuguese/news/ler-arquivos-json-em-python-como-usar-load-loads-e-dump-dumps-com-arquivos-json/
+
+https://kondado.com.br/blog/wiki/2021/11/24/funcao-jsonify/
+
+https://blog.betrybe.com/json/json-python/
+
+https://www.educba.com/flask-jsonify/
+
+https://docs.python.org/pt-br/3/library/json.html
