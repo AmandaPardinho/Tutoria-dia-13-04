@@ -25,7 +25,9 @@ def deleta_produto(id:int):
     del produtos[id]
 
 @app.route("/produtos", methods=['GET'])
-def editar_produtos():
+def editar_produtos(id:int, dados_produtos:dict):
+    produtos[id] = dados_produtos
+
 
     
 app.run(debug=True) 
