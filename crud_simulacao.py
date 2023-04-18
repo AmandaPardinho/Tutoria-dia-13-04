@@ -24,10 +24,15 @@ def criar_produtos(nome, descricao, preco):
 def deleta_produto(id:int):
     del produtos[id]
 
-@app.route("/produtos", methods=['GET'])
+@app.route("/produtos", methods=['GET', 'POST'])
 def editar_produtos(id:int, dados_produtos:dict):
     produtos[id] = dados_produtos
 
+# converte o dicionário produtos de python para JSON (observação que pode ser útil)
+# produtos_json = json.dumps(produtos, indent=4) 
 
-    
+
+# converte a string JSON em dicionário python (observação que pode ser útil) 
+# produtos_json = json.loads(produtos)
+
 app.run(debug=True) 
