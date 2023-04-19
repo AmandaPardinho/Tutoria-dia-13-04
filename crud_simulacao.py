@@ -10,6 +10,7 @@ produtos = {
 }
 
 # Simula a criação do id pelo banco de dados
+    # Com o banco de dados, o id passa a ser uma chave primária e autoincremento
 def gerar_id():
     id = len(produtos) + 1
     return id
