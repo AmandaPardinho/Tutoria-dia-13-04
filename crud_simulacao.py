@@ -1,19 +1,12 @@
 from flask import Flask
 import json
+import sqlite3
 
 app = Flask(__name__)
 
-produtos = {
-    "nome": "",
-    "descricao": "",
-    "preco": ""
-}
+# A tabela PRODUTOS criada no banco de dados deve conter as seguintes informações: ID_PRODUTO, NOME_PRODUTO, DESCRICAO_PRODUTO, MARCA_PRODUTO, PRECO_PRODUTO
 
-# Simula a criação do id pelo banco de dados
-    # Com o banco de dados, o id passa a ser uma chave primária e autoincremento
-def gerar_id():
-    id = len(produtos) + 1
-    return id
+# Com o banco de dados, o id passa a ser uma chave primária com autoincremento, ou seja, é criado assim que o produto é adicionado (não é preciso fazer uma função para criá-lo)
 
 # Cria um novo produto 
 @app.route("/produtos", methods=['GET', 'POST'])
