@@ -39,6 +39,12 @@ produto = {
 
 # A tabela PRODUTOS criada no banco de dados deve conter as seguintes informações: ID_PRODUTO, NOME_PRODUTO, DESCRICAO_PRODUTO, MARCA_PRODUTO, PRECO_PRODUTO
 
+# Métodos HTTP
+    # GET => Buscar
+    # POST => Criar
+    # PUT => Atualizar
+    # DELETE => Deletar
+
 # Com o banco de dados, o id passa a ser uma chave primária com autoincremento, ou seja, é criado assim que o produto é adicionado (não é preciso fazer uma função para criá-lo)
 
 def novo_indice():
@@ -55,11 +61,12 @@ def criar_produto():
 
 # Deleta um produto => apenas o administrador
 @app.route("/produtos/<int:id>", methods=['DELETE'])  
-def deleta_produto(id:int):
+def deleta_produto(id:int): 
     del produtos[id]
+    return {}
 
 # Editar um produto => apenas o administrador
-@app.route("/produto/<int:id>", methods=['UPDATE'])
+@app.route("/produto/<int:id>", methods=['PUT'])
 def editar_produto(id:int):
     produtos[id] = {"dados_produtos"}
 
