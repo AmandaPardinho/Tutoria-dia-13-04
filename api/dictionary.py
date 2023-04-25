@@ -44,3 +44,5 @@ def return_product(id:int):
         return jsonify({"error": "Product not found"}), 404
 
 # Return products
+def return_products():
+    return jsonify(products)
