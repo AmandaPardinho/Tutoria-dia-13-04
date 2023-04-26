@@ -42,29 +42,30 @@ def return_products():
     return jsonify(products)
 
 #create product
-def create_product(id:int):
+def create_product(id=None):
     if request.method == "POST":
-        id = create_id()
-        while id in products:
+        if id is None:
             id = create_id()
-        product = {
-            'id': id,
-            'name': request.json["name"],
-            'description': request.json["description"],
-            'brand': request.json["brand"],
-            'price': request.json["price"]
-        }
-        products[id] = product
-        return jsonify(products)        
-    else:
+            while id in products:
+                id = create_id()
+            product = {
+                'id': id,
+                'name': request.json["name"],
+                'description': request.json["description"],
+                'brand': request.json["brand"],
+                'price': request.json["price"]
+            }
+            products[id] = product
+            return jsonify(products)        
+    elif request.method == "PUT":
+        id = request.json["id"]
         if id in products:
             product = products[id]
-            product['id'] = request.json["id"]
             product['name'] = request.json["name"]
             product['description'] = request.json["description"]
             product['brand'] = request.json["brand"]
             product['price'] = request.json["price"]
-            return True, 202   
+            return jsonify(product), 200
         else:
             return jsonify({"error": "Product not found"}), 404
 
