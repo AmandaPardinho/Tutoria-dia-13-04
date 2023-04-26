@@ -1,4 +1,4 @@
-from flask import redirect, request, jsonify, url_for
+from flask import request, jsonify
 
 # Exemplo dicionário de produtos cadastrados
 products = {
@@ -30,28 +30,6 @@ def create_id():
     id = max(products.keys()) + 1
     return id
 
-#create product
-def create_product(name, description, brand, price):
-    if id == 0:
-        product = {}
-        product['name'] = request.json["name"]
-        product['description'] = request.json["description"]
-        product['brand'] = request.json["brand"]
-        product['price'] = request.json["price"]
-        return jsonify(product)        
-    else:
-        if id:
-            product = {}
-            product['name'] = request.json["name"]
-            product['description'] = request.json["description"]
-            product['brand'] = request.json["brand"]
-            product['price'] = request.json["price"]
-            return jsonify(products[id], product)
-        else:
-            return jsonify({"error": "Product not found"}), 404
-    
-        return redirect(url_for('products'))
-
 # Return product
 def return_product(id:int):
     if id in products.keys():
@@ -63,7 +41,34 @@ def return_product(id:int):
 def return_products():
     return jsonify(products)
 
+#create product
+def create_product(id:int):
+    if request.method == "POST":
+        id = create_id()
+        while id in products:
+            id = create_id()
+        product = {
+            'id': id,
+            'name': request.json["name"],
+            'description': request.json["description"],
+            'brand': request.json["brand"],
+            'price': request.json["price"]
+        }
+        products[id] = product
+        return jsonify(products)        
+    else:
+        if id in products:
+            product = products[id]
+            product['id'] = request.json["id"]
+            product['name'] = request.json["name"]
+            product['description'] = request.json["description"]
+            product['brand'] = request.json["brand"]
+            product['price'] = request.json["price"]
+            return True, 202   
+        else:
+            return jsonify({"error": "Product not found"}), 404
+
 # Delete product
 def delete_product(id:int):
     del products[id]
-    return jsonify({"Product was deleted"})
+    return {}
