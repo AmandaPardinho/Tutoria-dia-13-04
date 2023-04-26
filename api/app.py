@@ -13,7 +13,10 @@ def show_product(id:int):
 def show_all():
     return dictionary.return_products()
 
-#
+# Route to register a new product
+@app.route("/products", methods = ['POST'])
+def new_product():
+    return dictionary.create_product()
 
 
 app.run(debug=True)
