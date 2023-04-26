@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import redirect, request, jsonify, url_for
 
 # Exemplo dicionário de produtos cadastrados
 products = {
@@ -31,10 +31,26 @@ def create_id():
     return id
 
 #create product
-def create_product():
-    product = request.json
-    products[create_id()] = product
-    return jsonify(products)
+def create_product(name, description, brand, price):
+    if id == 0:
+        product = {}
+        product['name'] = request.json["name"]
+        product['description'] = request.json["description"]
+        product['brand'] = request.json["brand"]
+        product['price'] = request.json["price"]
+        return jsonify(product)        
+    else:
+        if id:
+            product = {}
+            product['name'] = request.json["name"]
+            product['description'] = request.json["description"]
+            product['brand'] = request.json["brand"]
+            product['price'] = request.json["price"]
+            return jsonify(products[id], product)
+        else:
+            return jsonify({"error": "Product not found"}), 404
+    
+        return redirect(url_for('products'))
 
 # Return product
 def return_product(id:int):
@@ -46,3 +62,8 @@ def return_product(id:int):
 # Return products
 def return_products():
     return jsonify(products)
+
+# Delete product
+def delete_product(id:int):
+    del products[id]
+    return jsonify({"Product was deleted"})
