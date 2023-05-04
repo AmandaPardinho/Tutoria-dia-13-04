@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request
 from connector import Connector
 from product import Products
+import os
 
-conn = Connector("products.db")
+way = os.path.dirname(os.path.realpath(__file__))
+db_path_way = os.path.join(way, 'products.db')
+conn = Connector(db_path_way)
 
 app = Flask(__name__)
 
@@ -35,6 +38,7 @@ def update_product(id_product):
     data = request.get_json()
     product = Products.get_product(id_product, conn.get_connection())
     if product:
+        product.id = id_product
         product.name = data["name"] 
         product.description = data["description"] 
         product.weight = data["weight"] 
@@ -52,7 +56,7 @@ def remove_product(id_product):
     product = Products.get_product(id_product, conn.get_connection())
     if product:
         product.delete_product(conn.get_connection())
-        return jsonify({"Message": "Product successfully deleted"}), 204
+        return jsonify({"Message": "Product successfully deleted"}), 200
     else:
         return jsonify({"Error": "Product not found"}), 404
 
