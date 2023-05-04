@@ -8,6 +8,6 @@ class Connector:
     def __init__(self, db_path):
         self.db_path = db_path
 
-    def get_connection():
+    def get_connection(self):
         conn = sqlite3.connect(self.db_path)
         return conn
